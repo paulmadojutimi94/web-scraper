@@ -1,0 +1,46 @@
+{
+  "passed": 34,
+  "total": 44,
+  "failures": [
+    {
+      "id": "p09_sale_price_was_now",
+      "detail": "price_pence: expected 1500, got 2000"
+    },
+    {
+      "id": "p13_only_n_left",
+      "detail": "stock_count: expected 3, got None"
+    },
+    {
+      "id": "p18_upc_label_with_colon",
+      "detail": "rejected: ['missing upc']"
+    },
+    {
+      "id": "p19_upc_label_lowercase",
+      "detail": "rejected: ['missing upc']"
+    },
+    {
+      "id": "l01_base_href",
+      "detail": "item_urls: expected ['http://shop.test/catalogue/a_1/index.html'], got ['http://shop.test/a_1/index.html']"
+    },
+    {
+      "id": "l02_rel_next_link",
+      "detail": "next_url: expected 'http://shop.test/catalogue/page-2.html', got None"
+    },
+    {
+      "id": "l03_href_with_whitespace",
+      "detail": "item_urls: expected ['http://shop.test/catalogue/a_1/index.html'], got ['http://shop.test/catalogue/a_1/index.html  ']"
+    },
+    {
+      "id": "l05_javascript_link_skipped",
+      "detail": "item_urls: expected ['http://shop.test/catalogue/b_2/index.html'], got ['javascript:/void(0)', 'http://shop.test/catalogue/b_2/index.html']"
+    },
+    {
+      "id": "r14_utf8_bom",
+      "detail": "expected allowed=False, got True (UNSAFE: fetches a disallowed page)"
+    },
+    {
+      "id": "c02_decimal",
+      "detail": "expected crawl-delay 2.5, got None"
+    }
+  ]
+}

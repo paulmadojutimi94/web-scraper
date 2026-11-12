@@ -14,3 +14,6 @@ select = ["E", "F", "W", "I", "B", "UP", "N"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff.lint.per-file-ignores]
+"evals/gold/cases.py" = ["E501"]  # frozen gold set: never reformatted

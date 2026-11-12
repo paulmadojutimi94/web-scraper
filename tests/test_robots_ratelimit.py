@@ -70,3 +70,45 @@ def test_pause_pushes_the_next_slot_back():
     rl.pause("a", 3.0)  # server said Retry-After: 3
     rl.wait("a", 0.5)
     assert clock.sleeps == [3.0]
+
+
+# --- regressions found by the gold set (RFC 9309) ------------------------------------------
+def test_longest_match_wins_not_first_match():
+    p = parse_robots(200, "User-agent: *\nAllow: /catalogue/\nDisallow: /catalogue/private/\n")
+    assert not p.allowed("http://x.test/catalogue/private/a.html", UA)
+    assert p.allowed("http://x.test/catalogue/page-1.html", UA)
+    p = parse_robots(200, "User-agent: *\nDisallow: /\nAllow: /catalogue/\n")
+    assert p.allowed("http://x.test/catalogue/page-1.html", UA)
+
+
+def test_allow_wins_a_tie():
+    p = parse_robots(200, "User-agent: *\nDisallow: /page\nAllow: /page\n")
+    assert p.allowed("http://x.test/page", UA)
+
+
+def test_wildcards_and_end_anchor():
+    p = parse_robots(200, "User-agent: *\nDisallow: /*.pdf$\nDisallow: /*?sort=\n")
+    assert not p.allowed("http://x.test/a/b.pdf", UA)
+    assert p.allowed("http://x.test/a/b.pdf?dl=1", UA)
+    assert not p.allowed("http://x.test/list?sort=price", UA)
+    assert p.allowed("http://x.test/list?page=2", UA)
+
+
+def test_bom_does_not_hide_the_first_group():
+    assert not parse_robots(200, "﻿User-agent: *\nDisallow: /\n").allowed("http://x.test/a", UA)
+
+
+def test_decimal_crawl_delay_and_specific_group():
+    assert parse_robots(200, "User-agent: *\nCrawl-delay: 2.5\n").crawl_delay(UA) == 2.5
+    text = "User-agent: web-scraper\nCrawl-delay: 3\n\nUser-agent: *\nCrawl-delay: 1\n"
+    assert parse_robots(200, text).crawl_delay(UA) == 3.0
+    assert parse_robots(200, "User-agent: *\nCrawl-delay: soon\n").crawl_delay(UA) is None
+
+
+def test_percent_encoding_is_normalised():
+    p = parse_robots(200, "User-agent: *\nDisallow: /%7Ejoe/\n")
+    assert not p.allowed("http://x.test/~joe/index.html", UA)
+
+
+def test_robots_txt_itself_is_always_allowed():
+    assert parse_robots(200, "User-agent: *\nDisallow: /\n").allowed("http://x.test/robots.txt", UA)

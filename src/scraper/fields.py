@@ -14,7 +14,8 @@ RATING_WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
 
 # 1,234.56 | 1234.5 | 12 -- the number part of a price
 _PRICE_RE = re.compile(r"(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d{1,2}))?")
-_COUNT_RE = re.compile(r"\((\d+)\s+available\)", re.IGNORECASE)
+# '(22 available)' on books.toscrape.com; 'Only 3 left' on many other shops
+_COUNT_RE = re.compile(r"(\d+)\s+(?:available|left)", re.IGNORECASE)
 
 
 def clean_text(text: str | None) -> str | None:
@@ -50,7 +51,8 @@ def parse_rating(classes: list[str] | None) -> int | None:
 
 
 def parse_availability(text: str | None) -> tuple[bool | None, int | None]:
-    """'In stock (22 available)' -> (True, 22); 'Out of stock' -> (False, 0)."""
+    """'In stock (22 available)' -> (True, 22); 'Only 3 left in stock' -> (True, 3);
+    'Out of stock' -> (False, 0)."""
     text = clean_text(text)
     if not text:
         return None, None

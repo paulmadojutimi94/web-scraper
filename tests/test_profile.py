@@ -49,3 +49,41 @@ def test_broken_pages_are_rejected_with_reasons():
 def test_empty_page_is_rejected_not_crashed():
     result = P.parse_item(b"", None, "http://x")
     assert result.item is None and len(result.reasons) == 3
+
+
+# --- regressions found by the gold set ------------------------------------------------------
+def _item(html_fragment_page: str):
+    return P.parse_item(html_fragment_page.encode(), None, "http://x/b").item
+
+
+def _page():
+    b = generate(3, 1)[0]
+    b.broken = None
+    return b, pages.product_page(b, 1)
+
+
+def test_struck_out_old_price_is_ignored():
+    b, html = _page()
+    html = html.replace(f'<p class="price_color">{pages.money(b.price_pence)}</p>',
+                        '<p class="price_color"><del>£20.00</del> £15.00</p>')
+    assert _item(html)["price_pence"] == 1500
+
+
+def test_table_labels_are_normalised():
+    b, html = _page()
+    assert _item(html.replace("<th>UPC</th>", "<th>upc:</th>"))["upc"] == b.upc
+
+
+def test_only_n_left():
+    from scraper.fields import parse_availability
+    assert parse_availability("Only 3 left in stock") == (True, 3)
+
+
+def test_base_href_rel_next_whitespace_and_javascript_links():
+    html = ('<html><head><base href="http://s.test/catalogue/"></head><body>'
+            '<article class="product_pod"><h3><a href=" a_1/index.html\n">A</a></h3></article>'
+            '<article class="product_pod"><h3><a href="javascript:void(0)">J</a></h3></article>'
+            '<a rel="next" href="page-2.html">Next</a></body></html>')
+    page = P.parse_listing(html.encode(), None, "http://s.test/index.html")
+    assert page.item_urls == ["http://s.test/catalogue/a_1/index.html"]
+    assert page.next_url == "http://s.test/catalogue/page-2.html"

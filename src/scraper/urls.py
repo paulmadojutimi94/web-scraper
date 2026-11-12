@@ -14,6 +14,8 @@ def normalize(url: str, base: str | None = None) -> str:
     can't spot that we've been there:
       HTTP://Books.Example:80/a/../b/#top  ->  http://books.example/b/
     """
+    # Browsers drop whitespace around an href and tabs/newlines inside it (WHATWG URL spec)
+    url = url.strip().replace("\t", "").replace("\n", "").replace("\r", "")
     if base is not None:
         url = urljoin(base, url)  # "../page-2.html" + page URL -> absolute URL
     url, _fragment = urldefrag(url)  # "#reviews" is the same page
