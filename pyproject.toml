@@ -17,3 +17,5 @@ testpaths = ["tests"]
 
 [tool.ruff.lint.per-file-ignores]
 "evals/gold/cases.py" = ["E501"]  # frozen gold set: never reformatted
+"evals/run_all.py" = ["E501"]  # long f-strings that render the README table
+"docs/demo/make_video.py" = ["E501"]  # caption and scene text

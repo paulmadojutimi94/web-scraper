@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS books (
     stock_count      INTEGER,
     description      TEXT,
     content_hash     TEXT NOT NULL,
+    parser_version   TEXT NOT NULL,     -- which profile code produced these values
     first_seen_run   INTEGER NOT NULL,
     last_seen_run    INTEGER NOT NULL,
     last_changed_run INTEGER NOT NULL
@@ -129,20 +130,22 @@ class Store:
         self.conn.execute("INSERT INTO rejects VALUES (?, ?, ?)", (run_id, url, "; ".join(reasons)))
 
     # -- books ----------------------------------------------------------------------------
-    def upsert_book(self, run_id: int, item: dict) -> str:
+    def upsert_book(self, run_id: int, item: dict, parser_version: str = "") -> str:
         """Insert, update, or just mark as seen. Returns 'new', 'changed' or 'unchanged'."""
         new_hash = content_hash(item)
         row = self.conn.execute("SELECT * FROM books WHERE url = ?", (item["url"],)).fetchone()
         if row is None:
             self.conn.execute(
-                f"INSERT INTO books (url, {', '.join(ITEM_FIELDS)}, content_hash, "
+                f"INSERT INTO books (url, {', '.join(ITEM_FIELDS)}, content_hash, parser_version, "
                 "first_seen_run, last_seen_run, last_changed_run) "
-                f"VALUES (?, {', '.join('?' for _ in ITEM_FIELDS)}, ?, ?, ?, ?)",
-                (item["url"], *[item[f] for f in ITEM_FIELDS], new_hash, run_id, run_id, run_id),
+                f"VALUES (?, {', '.join('?' for _ in ITEM_FIELDS)}, ?, ?, ?, ?, ?)",
+                (item["url"], *[item[f] for f in ITEM_FIELDS], new_hash, parser_version,
+                 run_id, run_id, run_id),
             )
             return "new"
         if row["content_hash"] == new_hash:
-            self.conn.execute("UPDATE books SET last_seen_run = ? WHERE url = ?", (run_id, item["url"]))
+            self.conn.execute("UPDATE books SET last_seen_run = ?, parser_version = ? WHERE url = ?",
+                              (run_id, parser_version, item["url"]))
             return "unchanged"
         for f in ITEM_FIELDS:  # record exactly which fields moved
             if row[f] != item[f]:
@@ -150,11 +153,19 @@ class Store:
                                   (run_id, item["url"], f, _s(row[f]), _s(item[f])))
         assignments = ", ".join(f"{f} = ?" for f in ITEM_FIELDS)
         self.conn.execute(
-            f"UPDATE books SET {assignments}, content_hash = ?, last_seen_run = ?, "
+            f"UPDATE books SET {assignments}, content_hash = ?, parser_version = ?, last_seen_run = ?, "
             "last_changed_run = ? WHERE url = ?",
-            (*[item[f] for f in ITEM_FIELDS], new_hash, run_id, run_id, item["url"]),
+            (*[item[f] for f in ITEM_FIELDS], new_hash, parser_version, run_id, run_id, item["url"]),
         )
         return "changed"
+
+    def mark_seen(self, run_id: int, url: str, parser_version: str) -> bool:
+        """Page came back 304 Not Modified: if we already hold this book, parsed by this same
+        parser, it can't have changed. Mark it seen and skip parsing. False = parse it."""
+        cur = self.conn.execute(
+            "UPDATE books SET last_seen_run = ? WHERE url = ? AND parser_version = ?",
+            (run_id, url, parser_version))
+        return cur.rowcount == 1
 
     def commit(self) -> None:
         self.conn.commit()

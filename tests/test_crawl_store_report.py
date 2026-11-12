@@ -130,3 +130,27 @@ def test_cli_refuses_rude_delay_on_public_sites(capsys):
         assert "too fast" in str(exc)
     else:
         raise AssertionError("expected SystemExit")
+
+
+def test_unchanged_304_pages_skip_parsing_unless_parser_changed(site, fast):
+    from scraper.profiles.books import BooksProfile
+
+    class Counting(BooksProfile):
+        calls = 0
+
+        def parse_item(self, *a):
+            Counting.calls += 1
+            return super().parse_item(*a)
+
+    store = Store(":memory:")
+    start = site.base + "/catalogue/page-1.html"
+    crawl(start, Counting(), store, fast)
+    first = Counting.calls
+    Counting.calls = 0
+    crawl(start, Counting(), store, fast)
+    assert Counting.calls == first - len(_stored(store))  # only previously rejected pages re-parsed
+    bumped = Counting()
+    bumped.version = "books-test-new"
+    Counting.calls = 0
+    crawl(start, bumped, store, fast)
+    assert Counting.calls == first  # new parser: everything re-parsed from the cache

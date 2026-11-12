@@ -129,6 +129,7 @@ class Fetcher:
     def _fetch_robots_text(self, url: str) -> tuple[int, str]:
         self.limiter.wait(host_of(url), self.s.min_delay_s)
         try:
+            self.limiter.mark_sent(host_of(url))
             resp = self.session.get(url, timeout=self.s.timeout_s, allow_redirects=True)
         except requests.RequestException:
             return 0, ""
@@ -244,6 +245,7 @@ class Fetcher:
 
     def _get_bounded(self, url: str, headers: dict, started: float) -> tuple[requests.Response, bytes]:
         """GET without following redirects; read at most max_bytes within timeout_s in total."""
+        self.limiter.mark_sent(host_of(url))
         resp = self.session.get(url, headers=headers, timeout=self.s.timeout_s,
                                 allow_redirects=False, stream=True)
         try:

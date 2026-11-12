@@ -95,12 +95,16 @@ def crawl(start_url: str, profile: Profile, store: Store, settings: Settings,
                 continue
             stats.item_pages += 1
             seen_items.add(result.final_url)  # after a redirect, the final URL is the book's real address
+            if result.outcome == "not_modified" and store.mark_seen(run_id, result.final_url,
+                                                                    profile.version):
+                stats.unchanged += 1  # same bytes + same parser = same book: skip the parse
+                continue
             parsed = profile.parse_item(result.body, result.encoding, result.final_url)
             if parsed.item is None:
                 stats.rejected += 1
                 store.log_reject(run_id, result.final_url, parsed.reasons)
                 continue
-            status = store.upsert_book(run_id, parsed.item)
+            status = store.upsert_book(run_id, parsed.item, profile.version)
             setattr(stats, status, getattr(stats, status) + 1)
         store.commit()  # one commit per listing page: a crash loses at most one page of work
         if progress:

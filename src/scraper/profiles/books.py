@@ -40,6 +40,7 @@ def table_key(label: str | None) -> str:
 
 class BooksProfile:
     name = "books"
+    version = "books-2"  # bump whenever parsing changes: cached pages get re-parsed
     default_start_url = "https://books.toscrape.com/catalogue/page-1.html"
 
     def parse_listing(self, body: bytes, encoding: str | None, url: str) -> ListingPage:

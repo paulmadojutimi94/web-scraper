@@ -112,3 +112,22 @@ def test_percent_encoding_is_normalised():
 
 def test_robots_txt_itself_is_always_allowed():
     assert parse_robots(200, "User-agent: *\nDisallow: /\n").allowed("http://x.test/robots.txt", UA)
+
+
+def test_delay_learned_later_still_applies_to_the_next_request():
+    # regression: robots.txt was fetched with the 0.1s default, then announced Crawl-delay 0.3
+    clock = FakeClock()
+    rl = HostRateLimiter(clock=clock, sleep=clock.sleep)
+    rl.wait("a", 0.1)  # robots.txt
+    rl.wait("a", 0.3)  # first page, now knowing Crawl-delay: 0.3
+    assert clock.sleeps == [0.3]
+
+
+def test_gap_is_measured_from_the_actual_send():
+    clock = FakeClock()
+    rl = HostRateLimiter(clock=clock, sleep=clock.sleep)
+    rl.wait("a", 1.0)
+    clock.now += 0.004  # something held us up for 4 ms before the request really went out
+    rl.mark_sent("a")
+    rl.wait("a", 1.0)
+    assert clock.sleeps == [1.0] and clock.now == 101.004  # a full second after the real send

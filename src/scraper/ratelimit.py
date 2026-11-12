@@ -19,20 +19,33 @@ class HostRateLimiter:
     ):
         self._clock = clock
         self._sleep = sleep
-        self._next_ok: dict[str, float] = {}
+        self._last: dict[str, float] = {}  # when we last contacted each host
+        self._paused_until: dict[str, float] = {}  # Retry-After / backoff
         self.total_slept_s = 0.0
 
     def wait(self, host: str, delay: float) -> None:
-        """Block until `host` may be contacted, then book the next slot."""
+        """Block until `host` may be contacted, then record the contact.
+
+        The gap is measured from the *last request* using the delay known *now*.
+        (The first version booked the next slot in advance with the delay known
+        then, so the request right after robots.txt ignored the Crawl-delay that
+        robots.txt had just announced. The politeness eval caught it.)
+        """
         now = self._clock()
-        ready_at = self._next_ok.get(host, now)
+        ready_at = max(self._last.get(host, float("-inf")) + delay,
+                       self._paused_until.get(host, float("-inf")))
         if ready_at > now:
             self._sleep(ready_at - now)
             self.total_slept_s += ready_at - now
             now = ready_at
-        self._next_ok[host] = now + delay
+        self._last[host] = now
 
     def pause(self, host: str, seconds: float) -> None:
-        """The server said 'come back in N seconds' (Retry-After): push the slot back."""
+        """The server said 'come back in N seconds' (Retry-After): nothing before then."""
         until = self._clock() + seconds
-        self._next_ok[host] = max(self._next_ok.get(host, 0.0), until)
+        self._paused_until[host] = max(self._paused_until.get(host, float("-inf")), until)
+
+    def mark_sent(self, host: str) -> None:
+        """Call at the instant a request goes out. The gap is then measured send-to-send,
+        even if something (a GC pause, another thread) delayed us after wait() returned."""
+        self._last[host] = max(self._last.get(host, float("-inf")), self._clock())

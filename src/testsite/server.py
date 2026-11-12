@@ -56,10 +56,12 @@ class TestSite:
     def __exit__(self, *exc) -> None:
         self.stop()
 
-    def reset_log(self) -> None:
+    def reset_log(self, hits: bool = True) -> None:
+        """Clear the request log. hits=True also re-arms the 'first request fails' faults."""
         with self.lock:
             self.log.clear()
-            self.hits.clear()
+            if hits:
+                self.hits.clear()
 
     # -- routing ---------------------------------------------------------------------------
     def robots_txt(self) -> str:

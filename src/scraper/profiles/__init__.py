@@ -20,6 +20,7 @@ class ItemResult:
 
 class Profile(Protocol):
     name: str
+    version: str
     default_start_url: str
 
     def parse_listing(self, body: bytes, encoding: str | None, url: str) -> ListingPage: ...
