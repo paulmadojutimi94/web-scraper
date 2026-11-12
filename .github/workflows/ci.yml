@@ -1,0 +1,21 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12", "3.13"]   # the robots.txt matcher must agree on all three
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install requests beautifulsoup4 lxml pytest ruff
+      - run: ruff check src tests evals scripts
+      - run: PYTHONPATH=src python -m pytest -q
+      - run: PYTHONPATH=src python evals/gold_eval.py
+      - run: python evals/robots_stdlib_compare.py   # documents the stdlib's behaviour on this version
+      - run: PYTHONPATH=src python evals/attack_eval.py > /dev/null
+      - run: PYTHONPATH=src python evals/run_all.py --check
+      - run: PYTHONPATH=src python scripts/demo.py --quick

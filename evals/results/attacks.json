@@ -1,0 +1,106 @@
+{
+  "attacks": [
+    {
+      "attack": "robots",
+      "what": "link to a page robots.txt disallows",
+      "defence_off": "respect_robots=False",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "loop",
+      "what": "page 3's 'next' points back to page 1",
+      "defence_off": "guard_visited=False",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "endless",
+      "what": "'next' forever, same items on every page",
+      "defence_off": "guard_no_progress=False",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "redirect",
+      "what": "item redirects to another host (SSRF-style)",
+      "defence_off": "guard_scope=False",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "bomb",
+      "what": "20 MB response with no Content-Length",
+      "defence_off": "max_bytes=None",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "slow",
+      "what": "server says nothing for 3 s",
+      "defence_off": "timeout_s=None",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "drip",
+      "what": "headers at once, then 1 byte every 0.25 s",
+      "defence_off": "guard_total_time=False",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "retryafter",
+      "what": "429 with Retry-After: 2",
+      "defence_off": "honor_retry_after=False",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "notHtml",
+      "what": "an image/png that contains a book page",
+      "defence_off": "check_content_type=False",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "xss",
+      "what": "title is a <script> tag",
+      "defence_off": "escape_html=False",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "formula",
+      "what": "title is an Excel formula",
+      "defence_off": "guard_formulas=False",
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": true
+    },
+    {
+      "attack": "sqli",
+      "what": "title is a SQL injection",
+      "defence_off": null,
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": null
+    },
+    {
+      "attack": "honeypot",
+      "what": "hidden link only a naive crawler follows",
+      "defence_off": null,
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": null
+    },
+    {
+      "attack": "storm",
+      "what": "item answers 503 forever",
+      "defence_off": null,
+      "succeeded_with_defences": false,
+      "succeeded_with_defence_off": null
+    }
+  ],
+  "success_with_defences": 0,
+  "total": 14,
+  "ablated": 11,
+  "success_with_defence_off": 11
+}

@@ -1,0 +1,40 @@
+[
+  {
+    "python": "3.11.18",
+    "passed": 12,
+    "total": 18,
+    "unsafe": 4,
+    "failures": [
+      "r03_longest_match_allow_wins",
+      "r04_longest_match_disallow_wins (unsafe)",
+      "r05_wildcard_extension_end (unsafe)",
+      "r07_wildcard_query (unsafe)",
+      "r14_utf8_bom (unsafe)",
+      "c02_decimal"
+    ]
+  },
+  {
+    "python": "3.12.3",
+    "passed": 12,
+    "total": 18,
+    "unsafe": 4,
+    "failures": [
+      "r03_longest_match_allow_wins",
+      "r04_longest_match_disallow_wins (unsafe)",
+      "r05_wildcard_extension_end (unsafe)",
+      "r07_wildcard_query (unsafe)",
+      "r14_utf8_bom (unsafe)",
+      "c02_decimal"
+    ]
+  },
+  {
+    "python": "3.13.18",
+    "passed": 16,
+    "total": 18,
+    "unsafe": 1,
+    "failures": [
+      "r14_utf8_bom (unsafe)",
+      "c02_decimal"
+    ]
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "cases": [
+    {
+      "delay_s": 0.2,
+      "crawl_delay_s": null,
+      "required_gap_s": 0.2,
+      "requests": 65,
+      "client_min_gap_s": 0.2001,
+      "client_gaps_too_short": 0,
+      "server_min_gap_s": 0.198,
+      "server_gaps_too_short": 0,
+      "disallowed_requests": 0,
+      "wrong_user_agent": 0,
+      "retry_after_cases": 0,
+      "retry_after_violations": 0
+    },
+    {
+      "delay_s": 0.1,
+      "crawl_delay_s": 0.3,
+      "required_gap_s": 0.3,
+      "requests": 65,
+      "client_min_gap_s": 0.3001,
+      "client_gaps_too_short": 0,
+      "server_min_gap_s": 0.2914,
+      "server_gaps_too_short": 0,
+      "disallowed_requests": 0,
+      "wrong_user_agent": 0,
+      "retry_after_cases": 0,
+      "retry_after_violations": 0
+    },
+    {
+      "delay_s": 0.5,
+      "crawl_delay_s": 0.25,
+      "required_gap_s": 0.5,
+      "requests": 33,
+      "client_min_gap_s": 0.5002,
+      "client_gaps_too_short": 0,
+      "server_min_gap_s": 0.4992,
+      "server_gaps_too_short": 0,
+      "disallowed_requests": 0,
+      "wrong_user_agent": 0,
+      "retry_after_cases": 0,
+      "retry_after_violations": 0
+    },
+    {
+      "delay_s": 0.2,
+      "crawl_delay_s": null,
+      "required_gap_s": 0.2,
+      "requests": 425,
+      "client_min_gap_s": 0.2001,
+      "client_gaps_too_short": 0,
+      "server_min_gap_s": 0.1973,
+      "server_gaps_too_short": 0,
+      "disallowed_requests": 0,
+      "wrong_user_agent": 0,
+      "retry_after_cases": 1,
+      "retry_after_violations": 0
+    }
+  ],
+  "total_requests": 588,
+  "client_gaps_too_short": 0,
+  "server_gaps_too_short": 0,
+  "client_min_shortfall_ms": 0.0,
+  "server_min_shortfall_ms": 8.6,
+  "disallowed_requests": 0,
+  "wrong_user_agent": 0
+}

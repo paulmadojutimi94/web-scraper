@@ -1,0 +1,41 @@
+$ scraper robots http://127.0.0.1:8000/catalogue/page-1.html
+robots.txt status 200 -> rules parsed
+allowed for us:   True
+crawl-delay:      None
+
+$ scraper fetch http://127.0.0.1:8000/admin/stats.html
+outcome   robots_blocked
+status    0
+final_url http://127.0.0.1:8000/admin/stats.html
+attempts  0
+elapsed   0 ms
+bytes     0
+charset   (not in header; parser will sniff <meta charset>)
+
+$ scraper fetch http://127.0.0.1:8000/catalogue/page-1.html
+outcome   ok
+status    200
+final_url http://127.0.0.1:8000/catalogue/page-1.html
+attempts  1
+elapsed   2 ms
+bytes     12297
+charset   (not in header; parser will sniff <meta charset>)
+
+--- run 1: first visit ---
+run 1: 50 listing + 990 item pages | 982 new, 0 changed, 0 unchanged, 8 rejected, 10 blocked, 0 failed | stop: done | 12.6s
+  outcomes: ok 1040, robots_blocked 10
+
+--- run 2: same site, nothing changed ---
+run 2: 50 listing + 990 item pages | 0 new, 0 changed, 982 unchanged, 8 rejected, 10 blocked, 0 failed | stop: done | 2.3s
+  outcomes: not_modified 1040, robots_blocked 10
+
+--- the shop changes some prices and stock ---
+run 3: 50 listing + 990 item pages | 0 new, 81 changed, 901 unchanged, 8 rejected, 10 blocked, 0 failed | stop: done | 2.6s
+  Story Journey Family Journey Garden Gard     £23.71 ->    £27.60
+  The Broken Harbour                           £56.44 ->    £64.78
+  The Broken Lighthouse (Book 2)               £48.47 ->    £55.65
+  The Broken Winter                            £46.31 ->    £51.12
+  The Burning Daughter (Revised Edition)       £44.79 ->    £37.70
+  ...50 price changes in total
+
+Reports: examples/summary.json, examples/report.md, examples/report.html, examples/books.csv

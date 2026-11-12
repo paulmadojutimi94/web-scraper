@@ -1,0 +1,466 @@
+{
+  "run": {
+    "run_id": 3,
+    "started_at": "2026-11-12T16:37:40+00:00",
+    "finished_at": "2026-11-12T16:37:42+00:00",
+    "start_url": "http://127.0.0.1:8000/catalogue/page-1.html",
+    "profile": "books",
+    "stop_reason": "done"
+  },
+  "crawl": {
+    "requests": 1050,
+    "http_attempts": 1052,
+    "retries": 0,
+    "redirects": 12,
+    "outcomes": {
+      "ok": 122,
+      "not_modified": 918,
+      "robots_blocked": 10
+    },
+    "bytes_downloaded": 635689,
+    "latency_ms_p50": 1.4,
+    "latency_ms_p95": 1.9,
+    "cache_hit_rate": 0.883
+  },
+  "catalogue": {
+    "books": 982,
+    "categories": 25,
+    "price_min_pence": 1004,
+    "price_median_pence": 3730,
+    "price_mean_pence": 7492,
+    "price_max_pence": 446087,
+    "rating_counts": {
+      "1": 181,
+      "2": 192,
+      "3": 196,
+      "4": 212,
+      "5": 201
+    },
+    "in_stock_pct": 86.5,
+    "units_in_stock": 9494,
+    "top_categories": [
+      {
+        "category": "Classics",
+        "books": 49,
+        "avg_price_pence": 7278.0
+      },
+      {
+        "category": "Poetry",
+        "books": 49,
+        "avg_price_pence": 3417.0
+      },
+      {
+        "category": "Food and Drink",
+        "books": 48,
+        "avg_price_pence": 3126.0
+      },
+      {
+        "category": "Music",
+        "books": 45,
+        "avg_price_pence": 12867.0
+      },
+      {
+        "category": "Young Adult",
+        "books": 45,
+        "avg_price_pence": 8880.0
+      },
+      {
+        "category": "Health",
+        "books": 44,
+        "avg_price_pence": 3590.0
+      },
+      {
+        "category": "Psychology",
+        "books": 44,
+        "avg_price_pence": 23387.0
+      },
+      {
+        "category": "Science Fiction",
+        "books": 44,
+        "avg_price_pence": 12937.0
+      },
+      {
+        "category": "Art",
+        "books": 43,
+        "avg_price_pence": 9694.0
+      },
+      {
+        "category": "Childrens",
+        "books": 42,
+        "avg_price_pence": 7909.0
+      }
+    ],
+    "best_value": [
+      {
+        "title": "The Northern River (Revised Edition)",
+        "price_pence": 1017,
+        "url": "http://127.0.0.1:8000/catalogue/the-northern-river-revised-edition_858/index.html"
+      },
+      {
+        "title": "The Broken Letters",
+        "price_pence": 1075,
+        "url": "http://127.0.0.1:8000/catalogue/the-broken-letters_443/index.html"
+      },
+      {
+        "title": "The Lonely River (A Novel)",
+        "price_pence": 1121,
+        "url": "http://127.0.0.1:8000/catalogue/the-lonely-river-a-novel_316/index.html"
+      },
+      {
+        "title": "The Broken River",
+        "price_pence": 1128,
+        "url": "http://127.0.0.1:8000/catalogue/the-broken-river_328/index.html"
+      },
+      {
+        "title": "The Paper Winter",
+        "price_pence": 1210,
+        "url": "http://127.0.0.1:8000/catalogue/the-paper-winter_597/index.html"
+      }
+    ]
+  },
+  "changes": {
+    "new_books": 0,
+    "fields_changed": {
+      "in_stock": 6,
+      "price_pence": 50,
+      "stock_count": 32
+    },
+    "price_changes": [
+      {
+        "title": "Story Journey Family Journey Garden Garden River House Family An Sea",
+        "url": "http://127.0.0.1:8000/catalogue/story-journey-family-journey-garden-garden-river-house-famil_402/index.html",
+        "old_pence": 2371,
+        "new_pence": 2760
+      },
+      {
+        "title": "The Broken Harbour",
+        "url": "http://127.0.0.1:8000/catalogue/the-broken-harbour_375/index.html",
+        "old_pence": 5644,
+        "new_pence": 6478
+      },
+      {
+        "title": "The Broken Lighthouse (Book 2)",
+        "url": "http://127.0.0.1:8000/catalogue/the-broken-lighthouse-book-2_320/index.html",
+        "old_pence": 4847,
+        "new_pence": 5565
+      },
+      {
+        "title": "The Broken Winter",
+        "url": "http://127.0.0.1:8000/catalogue/the-broken-winter_373/index.html",
+        "old_pence": 4631,
+        "new_pence": 5112
+      },
+      {
+        "title": "The Burning Daughter (Revised Edition)",
+        "url": "http://127.0.0.1:8000/catalogue/the-burning-daughter-revised-edition_645/index.html",
+        "old_pence": 4479,
+        "new_pence": 3770
+      },
+      {
+        "title": "The Burning Empire",
+        "url": "http://127.0.0.1:8000/catalogue/the-burning-empire_475/index.html",
+        "old_pence": 3397,
+        "new_pence": 3176
+      },
+      {
+        "title": "The Burning Fox",
+        "url": "http://127.0.0.1:8000/catalogue/the-burning-fox_57/index.html",
+        "old_pence": 413099,
+        "new_pence": 387355
+      },
+      {
+        "title": "The Burning Harbour (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-burning-harbour-a-novel_490/index.html",
+        "old_pence": 2952,
+        "new_pence": 3509
+      },
+      {
+        "title": "The Burning Kingdom (Book 2)",
+        "url": "http://127.0.0.1:8000/catalogue/the-burning-kingdom-book-2_56/index.html",
+        "old_pence": 3780,
+        "new_pence": 4521
+      },
+      {
+        "title": "The Burning Orchard",
+        "url": "http://127.0.0.1:8000/catalogue/the-burning-orchard_259/index.html",
+        "old_pence": 3001,
+        "new_pence": 3480
+      },
+      {
+        "title": "The Burning River (Revised Edition)",
+        "url": "http://127.0.0.1:8000/catalogue/the-burning-river-revised-edition_358/index.html",
+        "old_pence": 4650,
+        "new_pence": 4671
+      },
+      {
+        "title": "The Crimson Library (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-crimson-library-a-novel_531/index.html",
+        "old_pence": 4434,
+        "new_pence": 4957
+      },
+      {
+        "title": "The Crimson Station (Book 2)",
+        "url": "http://127.0.0.1:8000/catalogue/the-crimson-station-book-2_427/index.html",
+        "old_pence": 4497,
+        "new_pence": 4416
+      },
+      {
+        "title": "The Distant Fox",
+        "url": "http://127.0.0.1:8000/catalogue/the-distant-fox_11/index.html",
+        "old_pence": 2779,
+        "new_pence": 2254
+      },
+      {
+        "title": "The Distant Library (Book 2)",
+        "url": "http://127.0.0.1:8000/catalogue/the-distant-library-book-2_864/index.html",
+        "old_pence": 4971,
+        "new_pence": 5399
+      },
+      {
+        "title": "The Electric Harbour",
+        "url": "http://127.0.0.1:8000/catalogue/the-electric-harbour_291/index.html",
+        "old_pence": 4416,
+        "new_pence": 3879
+      },
+      {
+        "title": "The Golden Cartographer (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-golden-cartographer-a-novel_762/index.html",
+        "old_pence": 3414,
+        "new_pence": 3907
+      },
+      {
+        "title": "The Golden Harbour",
+        "url": "http://127.0.0.1:8000/catalogue/the-golden-harbour_590/index.html",
+        "old_pence": 5398,
+        "new_pence": 4870
+      },
+      {
+        "title": "The Golden Orchard (Book 2)",
+        "url": "http://127.0.0.1:8000/catalogue/the-golden-orchard-book-2_459/index.html",
+        "old_pence": 4475,
+        "new_pence": 3730
+      },
+      {
+        "title": "The Golden Winter",
+        "url": "http://127.0.0.1:8000/catalogue/the-golden-winter_691/index.html",
+        "old_pence": 4838,
+        "new_pence": 4660
+      },
+      {
+        "title": "The Hidden Empire",
+        "url": "http://127.0.0.1:8000/catalogue/the-hidden-empire_325/index.html",
+        "old_pence": 4998,
+        "new_pence": 5158
+      },
+      {
+        "title": "The Hidden Garden",
+        "url": "http://127.0.0.1:8000/catalogue/the-hidden-garden_753/index.html",
+        "old_pence": 1898,
+        "new_pence": 1657
+      },
+      {
+        "title": "The Hidden Library (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-hidden-library-a-novel_608/index.html",
+        "old_pence": 1979,
+        "new_pence": 1764
+      },
+      {
+        "title": "The Hungry Cartographer",
+        "url": "http://127.0.0.1:8000/catalogue/the-hungry-cartographer_15/index.html",
+        "old_pence": 3427,
+        "new_pence": 3187
+      },
+      {
+        "title": "The Hungry Machine",
+        "url": "http://127.0.0.1:8000/catalogue/the-hungry-machine_462/index.html",
+        "old_pence": 4288,
+        "new_pence": 4935
+      },
+      {
+        "title": "The Last Atlas",
+        "url": "http://127.0.0.1:8000/catalogue/the-last-atlas_50/index.html",
+        "old_pence": 2720,
+        "new_pence": 2570
+      },
+      {
+        "title": "The Last Atlas (Book 2)",
+        "url": "http://127.0.0.1:8000/catalogue/the-last-atlas-book-2_991/index.html",
+        "old_pence": 5057,
+        "new_pence": 4137
+      },
+      {
+        "title": "The Last Kingdom",
+        "url": "http://127.0.0.1:8000/catalogue/the-last-kingdom_235/index.html",
+        "old_pence": 4984,
+        "new_pence": 5861
+      },
+      {
+        "title": "The Last Letters",
+        "url": "http://127.0.0.1:8000/catalogue/the-last-letters_629/index.html",
+        "old_pence": 1447,
+        "new_pence": 1277
+      },
+      {
+        "title": "The Last Lighthouse",
+        "url": "http://127.0.0.1:8000/catalogue/the-last-lighthouse_543/index.html",
+        "old_pence": 4329,
+        "new_pence": 5069
+      },
+      {
+        "title": "The Little Letters (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-little-letters-a-novel_359/index.html",
+        "old_pence": 5284,
+        "new_pence": 5403
+      },
+      {
+        "title": "The Little Lighthouse",
+        "url": "http://127.0.0.1:8000/catalogue/the-little-lighthouse_591/index.html",
+        "old_pence": 1972,
+        "new_pence": 1854
+      },
+      {
+        "title": "The Lonely Daughter (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-lonely-daughter-a-novel_352/index.html",
+        "old_pence": 3452,
+        "new_pence": 3658
+      },
+      {
+        "title": "The Lonely Garden (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-lonely-garden-a-novel_181/index.html",
+        "old_pence": 3575,
+        "new_pence": 2909
+      },
+      {
+        "title": "The Lonely Winter",
+        "url": "http://127.0.0.1:8000/catalogue/the-lonely-winter_842/index.html",
+        "old_pence": 5093,
+        "new_pence": 5496
+      },
+      {
+        "title": "The Northern Orchard",
+        "url": "http://127.0.0.1:8000/catalogue/the-northern-orchard_912/index.html",
+        "old_pence": 3572,
+        "new_pence": 3452
+      },
+      {
+        "title": "The Paper Cartographer",
+        "url": "http://127.0.0.1:8000/catalogue/the-paper-cartographer_366/index.html",
+        "old_pence": 1623,
+        "new_pence": 1580
+      },
+      {
+        "title": "The Paper Letters",
+        "url": "http://127.0.0.1:8000/catalogue/the-paper-letters_226/index.html",
+        "old_pence": 5817,
+        "new_pence": 5399
+      },
+      {
+        "title": "The Paper Winter",
+        "url": "http://127.0.0.1:8000/catalogue/the-paper-winter_723/index.html",
+        "old_pence": 2298,
+        "new_pence": 1987
+      },
+      {
+        "title": "The Quiet Daughter (Vol. 3)",
+        "url": "http://127.0.0.1:8000/catalogue/the-quiet-daughter-vol-3_622/index.html",
+        "old_pence": 1178,
+        "new_pence": 1119
+      },
+      {
+        "title": "The Quiet River (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-quiet-river-a-novel_772/index.html",
+        "old_pence": 5493,
+        "new_pence": 5558
+      },
+      {
+        "title": "The Secret Cartographer (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-secret-cartographer-a-novel_717/index.html",
+        "old_pence": 1394,
+        "new_pence": 1588
+      },
+      {
+        "title": "The Secret Daughter",
+        "url": "http://127.0.0.1:8000/catalogue/the-secret-daughter_594/index.html",
+        "old_pence": 139207,
+        "new_pence": 123491
+      },
+      {
+        "title": "The Secret Kingdom",
+        "url": "http://127.0.0.1:8000/catalogue/the-secret-kingdom_598/index.html",
+        "old_pence": 3509,
+        "new_pence": 3957
+      },
+      {
+        "title": "The Silent Atlas (Book 2)",
+        "url": "http://127.0.0.1:8000/catalogue/the-silent-atlas-book-2_804/index.html",
+        "old_pence": 2787,
+        "new_pence": 2836
+      },
+      {
+        "title": "The Silent Garden (Book 2)",
+        "url": "http://127.0.0.1:8000/catalogue/the-silent-garden-book-2_884/index.html",
+        "old_pence": 2376,
+        "new_pence": 2674
+      },
+      {
+        "title": "The Silent Orchard (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-silent-orchard-a-novel_400/index.html",
+        "old_pence": 5021,
+        "new_pence": 4809
+      },
+      {
+        "title": "The Wild Machine",
+        "url": "http://127.0.0.1:8000/catalogue/the-wild-machine_529/index.html",
+        "old_pence": 3320,
+        "new_pence": 3217
+      },
+      {
+        "title": "The Wild Orchard",
+        "url": "http://127.0.0.1:8000/catalogue/the-wild-orchard_130/index.html",
+        "old_pence": 5532,
+        "new_pence": 6581
+      },
+      {
+        "title": "The Wild Station (A Novel)",
+        "url": "http://127.0.0.1:8000/catalogue/the-wild-station-a-novel_686/index.html",
+        "old_pence": 2571,
+        "new_pence": 2271
+      }
+    ],
+    "gone_since_last_run": []
+  },
+  "rejects": [
+    {
+      "url": "http://127.0.0.1:8000/catalogue/the-distant-river_184/index.html",
+      "reasons": "missing upc"
+    },
+    {
+      "url": "http://127.0.0.1:8000/catalogue/the-electric-station_281/index.html",
+      "reasons": "missing title"
+    },
+    {
+      "url": "http://127.0.0.1:8000/catalogue/the-hidden-fox_699/index.html",
+      "reasons": "missing upc"
+    },
+    {
+      "url": "http://127.0.0.1:8000/catalogue/the-hidden-river_488/index.html",
+      "reasons": "missing price_pence"
+    },
+    {
+      "url": "http://127.0.0.1:8000/catalogue/the-last-winter_213/index.html",
+      "reasons": "missing upc"
+    },
+    {
+      "url": "http://127.0.0.1:8000/catalogue/the-lonely-station_16/index.html",
+      "reasons": "missing price_pence"
+    },
+    {
+      "url": "http://127.0.0.1:8000/catalogue/the-quiet-letters_960/index.html",
+      "reasons": "missing price_pence"
+    },
+    {
+      "url": "http://127.0.0.1:8000/catalogue/voice-dark-garden-an-road-story-road-time-night-an-sea-of-lo_583/index.html",
+      "reasons": "missing title"
+    }
+  ]
+}
